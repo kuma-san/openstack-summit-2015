@@ -13,8 +13,9 @@ arakawa@r.recruit.co.jp
 - Belongs to "Research and Development" Team
 
 * Agenda
+- Quick Overview of Our Project
+- Problems that we had
 - Quick Recap of "what is Kuberenetes and GKE"
-- Project overview that uses Kubernetes
 - System Design before and after GKE
 - GKE Pros/Cons
 - How and why setup GKE with L7LB, and avoid pitfall
@@ -22,8 +23,8 @@ arakawa@r.recruit.co.jp
 - Summery
 
 * Quick Overview of Our Project
-- Made with h2o/PHP/Redis/MySQL/html/js/css and <3
 - Microservice Architecture
+- Made with h2o/PHP/Redis/MySQL/html/js/css and <3
 .image img/systemoverview.png
 
 * Project Members
@@ -37,6 +38,11 @@ Human resource is limited for small new project
 - Very hard to reproduce environment even I automated with ansible
 - Very hard to maintain and do enhancement
 
+* What I need
+- A way to release wasted resources
+- More fully automated way to operate IaaS
+- A simplify workflow of reproduction and deployment
+
 * What is Kubernetes(k8s)
 - "Kubernetes" pronounce as /koo-ber-nay'-tace/ クゥバ-ネィティス
 - Orchestration, service discovery and management tool for container cluster
@@ -47,9 +53,11 @@ Human resource is limited for small new project
 .image img/k8s-architecture.png
 
 * Important aspects of k8s
+- Node: instance that runs group of pods
 - Pods: group of containers
 - Replication controller: monitoring pods whether specific number of pod replicas are running
 - Networking: Each pod gets own private IP
+- Label: Pod identifier
 - Service: Load balance entrypoint for pods
 
 * Replication Controller config sample
@@ -140,35 +148,16 @@ Creating service for the pod
 * Pod Design with L7LB (schematic)
 .image img/step3-pod.png
 
-* Our next step
-Standerdize these workflow, architecture, system design within my division
-
 * Summary
 - Kubernetes works well with microservice architecture
 - Kubernetes with GKE = very easy and powerfull way to start with
+- Kubernetes made us cut down cost for IaaS fee
 - GKE with L7LB = good way to add scalability to the system
 - Still need to learn/catch up kubernetes and GCP itself too
 
+* Our next step
+Standerdize these workflow, architecture, system design within my division
+
 - Cut down initial IaaS cost and ops cost of new projects in my entire division
 
-* Appendix
-
-* Create GKE cluster
-Create GKE cluster in asia consist of 3 GCE instances
-
-.code code/create-cluster.sh
-
-* Create Pods
-Creating Replication Controller for frontend pod
-
-.code code/create-repcon.sh
-
-* Pod yaml file
-Creating 3 pods based on a docker image located at `asia.gcr.io/projectname/frontend`
-
-.code code/replication-controller.yaml
-
-* Dockerfile
-Basic nginx setup
-
-.code code/Dockerfile
+Keep on tracking a new stuff
