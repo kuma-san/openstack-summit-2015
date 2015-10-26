@@ -44,8 +44,14 @@ Made with h2o/PHP/Redis/MySQL
 - Cloneable
 - Recoverable
 
-
-* GKE Pros
+* Why I use GKE
+- Easy to manage dependency
+- Reproducible
+- Cloneable
+- Recoverable
+- Easy to integrate with GCP and other tools
+- Super easy to setup
+Chance to decrease init cost of new projects in entire division
 
 * Deploy workflow
 
