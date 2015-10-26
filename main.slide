@@ -1,0 +1,49 @@
+Using Kubernetes on GKE and L7LB in Production
+Openstack Summit Tokyo 2015, 28 Oct, 2015
+
+Hironori Arakawa
+Recruit Lifestyle Co. Ltd.
+@Morikuma_Works
+
+* About me
+- Hironori "KUMA" Arakawa
+- Backend/Infra guy
+- Belongs to "R/D" Team
+- Loves "Continuous Delivery" thought
+- STFUAWSC / RTFM / LMGTFY enthusiast
+
+* The story started with something like this
+Boss: "Hey kuma, do you have a minute."
+
+* The story started with something like this
+Boss: "Hey kuma, do you have a minute."
+Me: "Yeah, sure. What's up? (I have a bad feeling about this...)"
+
+* The story started with something like this
+Boss: "Hey kuma, do you have a minute."
+Me: "Yeah, sure. What's up? (I have a bad feeling about this...)"
+Planner: "I want you to make a web service something like this..."
+
+* The story started with something like this
+Boss: "Hey kuma, do you have a minute."
+Me: "Yeah, sure. What's up? (I have a bad feeling about this...)"
+Planner: "I want you to make this proof of concept  web service, something like this..."
+(Showing me some presentation slides)
+
+* Requirements and Conditions
+- Dev and Ops team for this project consists Myself and one Frontend Engineer
+- 
+
+
+
+* Agenda
+- Explain what I was trying to achieve
+- 
+- asses
+
+* another test
+.caption _Gopher_ by [[http://www.reneefrench.com][Renée French]]
+.image img/test.png
+
+* link
+.html code/test.html
