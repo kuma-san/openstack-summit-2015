@@ -27,7 +27,7 @@ Recruit Lifestyle Co. Ltd.
 - [ Node | Pod | Service | Label ] scheme
 - Takes certain amount of time to understand/setup everything
 - DNS? kube-proxy? apiserver? kubelet? etcd?
-.image img/k8s_logo.png
+.image img/k8s.png
 
 * Kubernetes with GKE
 - Full managed k8s service
@@ -36,30 +36,29 @@ Recruit Lifestyle Co. Ltd.
   setup k8s cluster, managing Master, logging, configure network etc.
 
 * Quick Overview of Our Project
-Made with h2o/PHP/Redis/MySQL
+Made with h2o/PHP/Redis/MySQL/html/js/css, Microservice Architecture
+.image img/systemoverview.png
 
-* Requirements
-- Dependency Management
-- Reproducible
-- Cloneable
-- Recoverable
+* ass
+.image img/systemoverview.png
 
 * Why I use GKE
 - Easy to manage dependency
 - Reproducible
 - Cloneable
 - Recoverable
+- Scalable
 - Easy to integrate with GCP and other tools
-- Super easy to setup
-Chance to decrease init cost of new projects in entire division
+- Super easy to setup a k8s cluster
+Chance to decrease initial and ops cost of new projects in my entire division
 
 * Deploy workflow
+.image img/deployflow.png
 
-* GKE Cons
+* System Design with GKE and GCP
+.image img/step2.png
 
-* System Design without GKE
-
-* System Design with GKE
+* Cons
 
 * L7LB in GCP
 
@@ -70,6 +69,7 @@ Chance to decrease init cost of new projects in entire division
 * Integrate L7LB and k8s service
 
 * Current System Design with GKE and L7LB
+.image img/step3.png
 
 * Conclusion
 
