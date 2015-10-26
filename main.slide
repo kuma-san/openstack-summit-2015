@@ -1,49 +1,174 @@
 Using Kubernetes on GKE and L7LB in Production
-Openstack Summit Tokyo 2015, 28 Oct, 2015
+Openstack Summit Tokyo 2015, 27 Oct, 2015
 
 Hironori Arakawa
 Recruit Lifestyle Co. Ltd.
 @Morikuma_Works
+arakawa@r.recruit.co.jp
 
 * About me
 - Hironori "KUMA" Arakawa
-- Backend/Infra guy
-- Belongs to "R/D" Team
-- Loves "Continuous Delivery" thought
-- STFUAWSC / RTFM / LMGTFY enthusiast
-
-* The story started with something like this
-Boss: "Hey kuma, do you have a minute."
-
-* The story started with something like this
-Boss: "Hey kuma, do you have a minute."
-Me: "Yeah, sure. What's up? (I have a bad feeling about this...)"
-
-* The story started with something like this
-Boss: "Hey kuma, do you have a minute."
-Me: "Yeah, sure. What's up? (I have a bad feeling about this...)"
-Planner: "I want you to make a web service something like this..."
-
-* The story started with something like this
-Boss: "Hey kuma, do you have a minute."
-Me: "Yeah, sure. What's up? (I have a bad feeling about this...)"
-Planner: "I want you to make this proof of concept  web service, something like this..."
-(Showing me some presentation slides)
-
-* Requirements and Conditions
-- Dev and Ops team for this project consists Myself and one Frontend Engineer
-- 
-
-
+- Web developer at Recruit Lifestyle Co. Ltd.
+- A backend/infra guy
+- Belongs to "Research and Development" Team
 
 * Agenda
-- Explain what I was trying to achieve
-- 
-- asses
+- Quick Recap of "what is Kuberenetes and GKE"
+- Project overview that uses Kubernetes
+- System Design before and after GKE
+- GKE Pros/Cons
+- How and why setup GKE with L7LB, and avoid pitfall
+- System Design after GKE with L7LB
+- Summery
 
-* another test
-.caption _Gopher_ by [[http://www.reneefrench.com][Renée French]]
-.image img/test.png
+* Quick Overview of Our Project
+- Made with h2o/PHP/Redis/MySQL/html/js/css and <3
+- Microservice Architecture
+.image img/systemoverview.png
 
-* link
-.html code/test.html
+* Project Members
+- Me as Infra and Backend engineer
+- A guy as frontend engineer
+- An another guy as team direction and planner
+Human resource is limited for small new project
+
+* Problems
+- Wasting too many resources (9 instance min. but only using 10% of resources)
+- Very hard to reproduce environment even I automated with ansible
+- Very hard to maintain and do enhancement
+
+* What is Kubernetes(k8s)
+- "Kubernetes" pronounce as /koo-ber-nay'-tace/ クゥバ-ネィティス
+- Orchestration, service discovery and management tool for container cluster
+- Manual/Auto healing, scaling
+- [ Node | Pod | Service | Label ] scheme
+
+* k8s Architecture
+.image img/k8s-architecture.png
+
+* Important aspects of k8s
+- Pods: group of containers
+- Replication controller: monitoring pods whether specific number of pod replicas are running
+- Networking: Each pod gets own private IP
+- Service: Load balance entrypoint for pods
+
+* Replication Controller config sample
+
+.code code/replication-controller.yaml
+
+* Service config sample
+
+.code code/guestbook-service.yaml
+
+* schematic diagram
+
+.image img/simple-service.png
+
+* What is Kubernetes(k8s)
+- "Kubernetes" pronounce as /koo-ber-nay'-tace/ クゥバ-ネィティス
+- Orchestration and management tool for docker cluster/containers
+- Manual/Auto healing, scaling
+- [ Node | Pod | Service | Label ] scheme
+- Takes a bit of time to understand architecture
+- Takes even more time to setup everything
+.image img/k8s.png
+.caption k8s logo
+
+* Kubernetes with GKE
+- Full managed k8s service in Google Cloud Platform(GCP)
+- Strong integration with other GCP services
+- GKE does heavy lifting for you
+-  setup k8s cluster, managing Master, logging, network configure etc.
+This 1 line of command will create k8s cluster in asia-east1-a by using 3 GCE instances
+
+.code code/create-cluster.sh
+
+* k8s with GKE Pros
+Strong Continuous Delivery tool
+
+- Easy to manage dependency
+- Reproducible
+- Cloneable
+- Recoverable
+- Scalable
+- Easy to integrate with GCP and other tools
+- Easy to build automated deploy workflow
+- Works well with Microservice Architecture
+
+* Automated Deploy workflow
+semi-Blue/Green Deployment by using `rolling-update`
+
+.image img/deployflow.png
+
+* System Design with GKE and GCP
+.image img/step2.png
+
+* Pod design (schematic)
+.image img/step2-pod.png
+
+* Problem
+Integration with HTTPS Load Balancer(L7LB)
+
+- Now mainly supports L4LB
+
+* L7LB in GCP
+- Able to handle 1 million request per second without worm up
+- Cross-region load balancing
+- Content-based load balancing
+- SSL Termination capability
+- HTTP/2 translation into HTTP/1.1
+
+* Small pitfalls integrating L7LB with GKE
+- L7LB is still in Beta
+- setup most of the things in CLI
+- specify service type as "NodePort" and "nodePort" as a number between 30000-32767 in yaml file
+- configure firewall
+- configure url-map to the nodePort specified in service yaml file
+
+* Create service for the pod
+Creating service for the pod
+
+.code code/create-service.sh
+
+* Service json file
+
+.code code/service.json
+
+* Current System Design with GKE and L7LB
+.image img/step3.png
+
+* Pod Design with L7LB (schematic)
+.image img/step3-pod.png
+
+* Our next step
+Standerdize these workflow, architecture, system design within my division
+
+* Summary
+- Kubernetes works well with microservice architecture
+- Kubernetes with GKE = very easy and powerfull way to start with
+- GKE with L7LB = good way to add scalability to the system
+- Still need to learn/catch up kubernetes and GCP itself too
+
+- Cut down initial IaaS cost and ops cost of new projects in my entire division
+
+* Appendix
+
+* Create GKE cluster
+Create GKE cluster in asia consist of 3 GCE instances
+
+.code code/create-cluster.sh
+
+* Create Pods
+Creating Replication Controller for frontend pod
+
+.code code/create-repcon.sh
+
+* Pod yaml file
+Creating 3 pods based on a docker image located at `asia.gcr.io/projectname/frontend`
+
+.code code/replication-controller.yaml
+
+* Dockerfile
+Basic nginx setup
+
+.code code/Dockerfile
