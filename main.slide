@@ -39,9 +39,9 @@ Human resource is limited for small new project
 - Very hard to maintain and do enhancement
 
 * What I need
-- A way to release wasted resources
-- More fully automated way to operate IaaS
-- A simplify workflow of reproduction and deployment
+- A way to release/utilize wasted resources
+- Even more fully automated to operate IaaS
+- A simplified workflow of reproduction and deployment
 
 * What is Kubernetes(k8s)
 - "Kubernetes" pronounce as /koo-ber-nay'-tace/ クゥバ-ネィティス
@@ -160,4 +160,6 @@ Standerdize these workflow, architecture, system design within my division
 
 - Cut down initial IaaS cost and ops cost of new projects in my entire division
 
-Keep on tracking a new stuff
+Keep tracking a new stuff
+
+- Container technology changes dramatically day by day
